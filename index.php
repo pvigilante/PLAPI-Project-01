@@ -23,9 +23,10 @@ function __($input){
   <body>
     <div class="container">
         <h3>Cars</h3>
+        
         <hr>
-
-        <div class="row">
+        <p>Search our database of cars</p>
+        <div class="row card py-4 px-3">
           <div class="col-12">
               <form class="input-group" id="search-form">
                   <div class="input-group-prepend">
@@ -50,39 +51,47 @@ function __($input){
                     placeholder="Enter Nickname" 
                     class="form-control" id="search-nickname">
 
-                  <div class="input-group-append">
-                      <button class="btn btn-primary form-control" type="submit">
-                        <i class="fas fa-search"></i>
-                      </button>
-                  </div>
+                  
               </form>
           </div>
         </div>
-
-        <table class="table">
-            <thead>
+        <div class="card row mt-4">
+        <table class="table table-hover table-striped rounded">
+            <thead class="thead-dark rounded">
                 <th>Make</th>
                 <th>Model</th>
                 <th>Year</th>
                 <th>Nickname</th>
+                <th></th>
             </thead>
             <tbody id="search-results">
-            <?php
-            $sql = "SELECT * FROM cars";
-            $results = $db->query($sql);
-
-            while($row = $results->fetch_assoc()){
-                echo "<tr>";
-                echo "<td>" . __($row["make"]) . "</td>";
-                echo "<td>" . __($row["model"]) . "</td>";
-                echo "<td>" . __($row["year"]) . "</td>";
-                echo "<td>" . __($row["nickname"]) . "</td>";
-                echo "</tr>";
-            }
-
-            ?>
+           
             </tbody>
+            <tfoot>
+                <th><input type="text" class="form-control" placeholder="Make" id="car_make_input"></th>
+                <th><input type="text" class="form-control" placeholder="Model" id="car_model_input"></th>
+                <th><input type="text" class="form-control" placeholder="Year" id="car_year_input"></th>
+                <th><input type="text" class="form-control" placeholder="Nickname" id="car_nickname_input"></th>
+                <th><button class="btn btn-primary" data-action="add"><i class="fas fa-plus"></i></button></th>
+            </tfoot>
         </table>
+        </div>
+    </div>
+
+
+    <!-- Modal -->
+    <div class="modal fade" id="deleteCarAlert" tabindex="-1" role="dialog" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-body">
+            Are you sure your want to delete this car?
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+            <button type="button" class="btn btn-danger" data-action="confirm-delete">Delete</button>
+          </div>
+        </div>
+      </div>
     </div>
 
     <!-- Optional JavaScript -->
